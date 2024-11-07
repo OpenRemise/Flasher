@@ -30,7 +30,7 @@ jobs:
       - name: Install prerequisites
         run: |
           sudo apt update -y
-          sudo apt install -y doxygen graphviz openjdk-21-jdk
+          sudo apt install -y doxygen graphviz openjdk-21-jdk qt6-base-dev qt6-5compat-dev qt6-serialport-dev
       - run: cmake -Bbuild
       - run: cmake --build build --parallel --target FlasherDocs
       - name: Setup Pages
