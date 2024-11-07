@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run act",
+      "type": "shell",
+      "isBackground": true,
+      "command": "act --artifact-server-path build"
+    },
+    {
+      "label": "Run act x86_64-linux-gnu-gcc",
+      "type": "shell",
+      "isBackground": true,
+      "command": "act --artifact-server-path build -j x86_64-linux-gnu-gcc"
+    },
+    {
+      "label": "Run act x86_64-w64-mingw32-gcc",
+      "type": "shell",
+      "isBackground": true,
+      "command": "act --artifact-server-path build -j x86_64-w64-mingw32-gcc"
+    },
+    {
+      "label": "Run Flasher",
+      "type": "shell",
+      "isBackground": true,
+      "command": "./build/Flasher"
+    },
+    {
+      "label": "Run Flasher valgrind",
+      "type": "shell",
+      "isBackground": true,
+      "command": "valgrind --error-exitcode=1 --leak-check=yes --errors-for-leak-kinds=definite,indirect ./build/Flasher"
+    },
+    {
+      "label": "Run Python http.server",
+      "type": "shell",
+      "isBackground": true,
+      "command": "python -m http.server --directory ${workspaceFolder}/build/docs/html --bind 127.0.0.1"
+    }
+  ]
+}
