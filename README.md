@@ -1,4 +1,4 @@
-# :construction: Flasher :construction:
+# Flasher
 
 [![build](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml/badge.svg)](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml) [![license](https://img.shields.io/github/license/OpenRemise/Flasher)](https://github.com/OpenRemise/Flasher/raw/master/LICENSE)
 
@@ -9,15 +9,42 @@
 </picture>
 </a>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue mauris, congue sit amet euismod ut, tristique ut ex. Pellentesque sed gravida justo, id ornare purus. Morbi posuere velit a eros fermentum sollicitudin. Curabitur mollis mauris nec neque interdum fermentum at sit amet felis. Etiam commodo id sapien ut sollicitudin. Maecenas at euismod erat, sed cursus diam. Aliquam tempor elit diam, nec fermentum mi fringilla eu. Nulla sagittis sollicitudin sapien, vel tempus ipsum auctor non. Morbi nec ante vel augue sodales imperdiet. Sed a finibus justo. In metus lacus, placerat ut dui in, ultricies laoreet ex. Donec in libero a velit scelerisque venenatis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet dui ultrices, aliquet lectus eu, sollicitudin massa. Vivamus quam nulla, efficitur non massa id, faucibus porta mi. Vivamus nec nunc rutrum, semper lectus vel, eleifend est. 
+Flasher is a GUI wrapper around [esp-serial-flasher](https://github.com/espressif/esp-serial-flasher), a portable C library for flashing of [Espressif](https://www.espressif.com/) SoCs. It is used to load the [OpenRemise](https://openremise.at/) [Firmware](https://github.com/OpenRemise/Firmware) onto any of the following supported boards:
+- [S3Main](https://github.com/OpenRemise/S3Main)
 
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#a">A</a></li>
-    <li><a href="#b">B</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#options">Options</a></li>
       <ul>
-        <li><a href="#c">C</a></li>
+        <li><a href="#board">Board</a></li>
+        <li><a href="#serial-port">Serial Port</a></li>
+        <li><a href="#baud-rate">Baud Rate</a></li>
       </ul>
+    <li><a href="#usage">Usage</a></li>
   </ol>
 </details>
+
+## Features
+- **No dependencies**
+- Flash [OpenRemise](https://openremise.at/) boards from either
+  - [Latest release](https://github.com/OpenRemise/Firmware/releases/latest)
+  - or local .zip archive
+- Pre-built Windows and Linux executables
+
+## Options
+At the bottom of the GUI there are a few settings available via drop down menus.  
+![options](data/images/options.png)
+
+### Board
+The board type onto which the firmware should be flashed. Currently only `S3Main` is supported.
+
+### Serial Port
+The serial port used for flashing. Normally the port should be detected automatically, so it is recommended to leave the setting on `auto`.
+
+### Baud Rate
+The default Flasher baud rate is `115200`. Slower rates may be set using the drop down. It is **recommend** to only set the baud rate if you're experiencing transmission errors during flashing. If left at default Flasher tries to change the baud rate to `460800` when running to considerably reduce flash times.
+
+## Usage
+At this point we refer you to the [Getting Started](https://openremise.at/page_getting_started.html#section_getting_started_install) section on [openremise.at](https://openremise.at). There you will find extensive information on how to get a board up and running using Flasher.
