@@ -9,7 +9,7 @@
 </picture>
 </a>
 
-Flasher is a GUI wrapper around [esp-serial-flasher](https://github.com/espressif/esp-serial-flasher), a portable C library for flashing of [Espressif](https://www.espressif.com/) SoCs. It is used to load the [OpenRemise](https://openremise.at/) [Firmware](https://github.com/OpenRemise/Firmware) onto any of the following supported boards:
+Flasher is a GUI wrapper around [esp-serial-flasher](https://github.com/espressif/esp-serial-flasher), a portable C library for flashing of [Espressif](https://www.espressif.com) SoCs. It is used to load the [OpenRemise](https://openremise.at) [Firmware](https://github.com/OpenRemise/Firmware) onto any of the following supported boards:
 - [S3Main](https://github.com/OpenRemise/S3Main)
 
 <details>
@@ -28,9 +28,9 @@ Flasher is a GUI wrapper around [esp-serial-flasher](https://github.com/espressi
 
 ## Features
 - **No dependencies**
-- Flash [OpenRemise](https://openremise.at/) boards from either
-  - [Latest release](https://github.com/OpenRemise/Firmware/releases/latest)
-  - or local .zip archive
+- Flash [OpenRemise](https://openremise.at) boards from either
+  - the [latest release](https://github.com/OpenRemise/Firmware/releases/latest)
+  - or a local .zip archive
 - Pre-built Windows and Linux executables
 
 ## Options
