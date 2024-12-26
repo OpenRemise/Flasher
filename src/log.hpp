@@ -25,8 +25,11 @@
 
 /// Redirect Qt logging types to QTextEdit
 ///
-/// Log redirects all Qt logging types (qCritical, qDebug, qFatal, qInfo and
-/// qWarning) to a QTextEdit widget.
+/// Log redirects all [Qt logging types](https://doc.qt.io/qt-6/qtlogging.html)
+/// (qCritical, qDebug, qFatal, qInfo and qWarning) to a
+/// [QTextEdit](https://doc.qt.io/qt-6/qtextedit.html) widget. This works by
+/// installing the MessageHandler singleton and connecting it to the
+/// Log::messageHandler() slot.
 class Log : public QTextEdit {
   Q_OBJECT
 

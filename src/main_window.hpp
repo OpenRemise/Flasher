@@ -28,6 +28,16 @@
 #include "log.hpp"
 
 /// Main window
+///
+/// MainWindow is the application entry point from main(). It inherits
+/// [QMainWindow](https://doc.qt.io/qt-6/qmainwindow.html) and is responsible
+/// for creating the [QVBoxLayout](https://doc.qt.io/qt-6/qvboxlayout.html)
+/// containing the [Toolbar](https://doc.qt.io/qt-6/qtoolbar.html), Log and
+/// ComBox widgets.
+///
+/// This class also contains functions to open firmware .zip files locally
+/// (MainWindow::addArchiveFromHardDrive()) or from the Internet
+/// (MainWindow::addArchiveFromNetworkDrive()).
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
