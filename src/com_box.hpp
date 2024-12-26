@@ -30,9 +30,10 @@
 
 /// Bottom part GUI widget which displays serial port options
 ///
-/// ComBox is a QGroupBox widget which displays a couple of dropdown menus to
-/// choose various serial port options. Apart from that, there is a start/stop
-/// button to start the writing process.
+/// ComBox inherits a [QGroupBox](https://doc.qt.io/qt-6/qgroupbox.html) widget
+/// which displays a couple of dropdown menus to choose various serial port
+/// options. Apart from that, there is a start/stop button to start the writing
+/// process.
 class ComBox : public QGroupBox {
   Q_OBJECT
 

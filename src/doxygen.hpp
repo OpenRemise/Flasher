@@ -159,8 +159,22 @@
 
 /// \page page_api_reference API reference
 /// \details \tableofcontents
-/// \todo
-/// API page
+/// The entire GUI is split into just three sections.
+/// - Toolbar for downloading/opening a firmware
+/// - %Log displaying messages
+/// - %ComBox which is a bunch of settings and a start button
+///
+/// \image html gui.png "GUI"
+///
+/// \section section_main_window MainWindow
+/// \copydetails MainWindow
+///
+/// \section section_log Log
+/// \copydetails Log
+///
+/// \section section_com_box ComBox
+/// \copydetails ComBox
+///
 ///
 /// <div class="section_buttons">
 /// | Previous                  |
