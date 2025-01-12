@@ -34,9 +34,11 @@ int main(int argc, char* argv[]) {
   // Initialize resources
   Q_INIT_RESOURCE(qtbreeze_stylesheets);
 
-  // Default to monospace font
-  QFontDatabase::addApplicationFont(":/fonts/GlacialIndifference-Regular.otf");
-  QFont font{"GlacialIndifference-Regular"};
+  /// \bug Adding GlacialIndifference does not work on Windows
+  if (QFontDatabase::addApplicationFont(
+        ":/fonts/GlacialIndifference-Regular.otf") == -1)
+    return -1;
+  QFont font{"GlacialIndifference"};
   font.setPointSize(10);
   app.setFont(font);
 
