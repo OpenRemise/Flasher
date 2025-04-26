@@ -3,12 +3,14 @@ name: build
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   x86_64-linux-gnu-gcc:
     runs-on: ubuntu-20.04
+    if: github.event_name == 'workflow_dispatch'
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
       - name: Install prerequisites
@@ -24,15 +26,16 @@ jobs:
         run: |
           echo "ARTIFACT_NAME=$(find build -type f -name "Flasher-*.zip" -printf "%f\n")" >> $GITHUB_ENV
           echo "ARTIFACT_PATH=$(find build -type f -name "Flasher-*.zip")" >> $GITHUB_ENV
-      - uses: actions/upload-artifact@v4.3.3
+      - uses: actions/upload-artifact@v4.6.2
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.ARTIFACT_PATH }}
 
   x86_64-w64-mingw32-gcc:
     runs-on: ubuntu-24.04
+    if: github.event_name == 'push'
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
       - name: Install prerequisites
@@ -46,7 +49,7 @@ jobs:
         run: |
           echo "ARTIFACT_NAME=$(find build -type f -name "Flasher-*.zip" -printf "%f\n")" >> $GITHUB_ENV
           echo "ARTIFACT_PATH=$(find build -type f -name "Flasher-*.zip")" >> $GITHUB_ENV
-      - uses: actions/upload-artifact@v4.3.3
+      - uses: actions/upload-artifact@v4.6.2
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.ARTIFACT_PATH }}
