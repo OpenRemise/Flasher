@@ -39,18 +39,22 @@ ComBox::ComBox(QWidget* parent) : QGroupBox{parent} {
   _start_stop_button->setCheckable(true);
 
   // Chips dropdown
+  _board_combobox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   for (auto const& board : boards) _board_combobox->addItem(board);
   // _board_combobox->setCurrentIndex(_board_combobox->findText("auto"));
   _board_combobox->setToolTip("Target chip type");
 
   // Port dropdown
+  _port_combobox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   _port_combobox->addItem("auto");
+  _port_combobox->addItem("ttyUSB123");
   // Install an event filter which updates list of serial ports every time the
   // dropdown is selected
   _port_combobox->installEventFilter(new UpdatePortsEventFilter{this});
   _port_combobox->setToolTip("Serial port device");
 
   // Baud dropdown
+  _baud_combobox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   _baud_combobox->addItem("auto");
   for (auto const& baud_rate : QSerialPortInfo::standardBaudRates())
     if (baud_rate <= 115200)
