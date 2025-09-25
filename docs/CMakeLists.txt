@@ -1,34 +1,33 @@
+# Get Doxygen
+cpmaddpackage(
+  NAME
+  Doxygen
+  URL
+  "https://github.com/doxygen/doxygen/releases/download/Release_1_14_0/doxygen-1.14.0.linux.bin.tar.gz"
+  VERSION
+  1.14.0
+  DOWNLOAD_ONLY
+  ON)
+set(DOXYGEN_EXECUTABLE ${Doxygen_SOURCE_DIR}/bin/doxygen)
 find_package(Doxygen QUIET COMPONENTS dot)
 
-if(Doxygen_FOUND)
-  # Get more recent version of Doxygen (remove once updated in Ubuntu 24.04)
-  cpmaddpackage(
-    NAME
-    Doxygen
-    URL
-    "https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz"
-    VERSION
-    1.12.0
-    DOWNLOAD_ONLY
-    ON)
-  set(DOXYGEN_EXECUTABLE ${Doxygen_SOURCE_DIR}/bin/doxygen)
-
+if(TARGET Doxygen::dot)
   # Get PlantUML
   cpmaddpackage(
     NAME
     PlantUML
     URL
-    "https://github.com/plantuml/plantuml/releases/download/v1.2024.7/plantuml-1.2024.7.jar"
+    "https://github.com/plantuml/plantuml/releases/download/v1.2025.1/plantuml-1.2025.1.jar"
     VERSION
-    1.2024.7
+    1.2025.1
     DOWNLOAD_ONLY
     ON
     DOWNLOAD_NO_EXTRACT
     ON)
-  set(PLANTUML_JAR_PATH ${PlantUML_SOURCE_DIR}/plantuml-1.2024.7.jar)
+  set(PLANTUML_JAR_PATH ${PlantUML_SOURCE_DIR}/plantuml-1.2025.1.jar)
 
   # Get Doxygen Awesome
-  cpmaddpackage("gh:jothepro/doxygen-awesome-css@2.3.4")
+  cpmaddpackage("gh:jothepro/doxygen-awesome-css@2.4.0")
 
   # Get logo and fonts
   file(DOWNLOAD
@@ -76,6 +75,7 @@ if(Doxygen_FOUND)
   set(DOXYGEN_HTML_COLORSTYLE_GAMMA 113)
   set(DOXYGEN_HTML_COPY_CLIPBOARD NO)
   set(DOXYGEN_GENERATE_TREEVIEW YES)
+  set(DOXYGEN_PAGE_OUTLINE_PANEL NO)
   set(DOXYGEN_MACRO_EXPANSION YES)
   set(DOXYGEN_EXPAND_ONLY_PREDEF YES)
   set(DOXYGEN_UML_LOOK YES)

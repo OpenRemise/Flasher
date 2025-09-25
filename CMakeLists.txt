@@ -404,7 +404,7 @@ if(NOT TARGET Qt::BreezeStyleSheets)
 endif()
 
 if(NOT TARGET Qt::ESPFlasher)
-  cpmaddpackage("gh:higaski/QtESPFlasher@0.0.1")
+  cpmaddpackage("gh:higaski/QtESPFlasher@0.1.1")
 endif()
 
 if(NOT TARGET QuaZip::QuaZip)
@@ -414,7 +414,7 @@ if(NOT TARGET QuaZip::QuaZip)
     GITHUB_REPOSITORY
     "stachenov/quazip"
     VERSION
-    1.4
+    1.5
     SYSTEM
     ON
     OPTIONS

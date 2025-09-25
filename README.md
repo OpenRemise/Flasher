@@ -1,6 +1,6 @@
 # Flasher
 
-[![build](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml/badge.svg)](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml) [![license](https://img.shields.io/github/license/OpenRemise/Flasher)](https://github.com/OpenRemise/Flasher/raw/master/LICENSE)
+[![build](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml/badge.svg)](https://github.com/OpenRemise/Flasher/actions/workflows/build.yml) [![release](https://github.com/OpenRemise/Flasher/actions/workflows/release.yml/badge.svg)](https://github.com/OpenRemise/Flasher/actions/workflows/release.yml) [![license](https://img.shields.io/github/license/OpenRemise/Flasher)](https://github.com/OpenRemise/Flasher/raw/master/LICENSE)
 
 <a href="https://openremise.at">
 <picture>
