@@ -5,7 +5,7 @@ include(FetchContent)
 FetchContent_Declare(
   CMakeModules
   GIT_REPOSITORY "https://github.com/ZIMO-Elektronik/CMakeModules"
-  GIT_TAG v0.9.5
+  GIT_TAG v0.12.2
   SOURCE_DIR ${CMAKE_BINARY_DIR}/CMakeModules)
 FetchContent_MakeAvailable(CMakeModules)
 
@@ -404,7 +404,7 @@ if(NOT TARGET Qt::BreezeStyleSheets)
 endif()
 
 if(NOT TARGET Qt::ESPFlasher)
-  cpmaddpackage("gh:higaski/QtESPFlasher@0.1.1")
+  cpmaddpackage("gh:higaski/QtESPFlasher@1.11.0")
 endif()
 
 if(NOT TARGET QuaZip::QuaZip)
