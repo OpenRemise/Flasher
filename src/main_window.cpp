@@ -130,14 +130,22 @@ void MainWindow::addArchiveFromHardDrive(QString ar_path) {
   // Gather binaries
   QVector<Bin> bins{};
   QFile json{json_path};
-  json.open(QIODevice::ReadOnly | QIODevice::Text);
+  if (!json.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qCritical().noquote() << "Opening" << QFileInfo{json}.fileName()
+                          << "failed";
+    return;
+  }
   QJsonDocument const doc{QJsonDocument::fromJson(json.readAll())};
   QJsonObject const flash_files{doc["flash_files"].toObject()};
   for (auto const& offset : flash_files.keys()) {
     auto const bin_path{QFileInfo{json_path}.dir().filePath(
       flash_files.value(offset).toString())};
     QFile bytes{bin_path};
-    bytes.open(QIODevice::ReadOnly);
+    if (!bytes.open(QIODevice::ReadOnly)) {
+      qCritical().noquote()
+        << "Opening" << QFileInfo{bytes}.fileName() << "failed";
+      return;
+    }
     bins.push_back(
       {.offset = offset.toUInt(nullptr, 0), .bytes = bytes.readAll()});
   }
@@ -199,7 +207,11 @@ void MainWindow::addArchiveFromNetworkDrive(QString browser_download_url) {
 
     // Download .zip archive
     QFile file(temp_dir.filePath(QFileInfo{browser_download_url}.fileName()));
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+      qCritical().noquote()
+        << "Opening" << QFileInfo{file}.fileName() << "failed";
+      return;
+    }
     file.write(reply->readAll());
     file.close();
     addArchiveFromHardDrive(QFileInfo{file}.absoluteFilePath());

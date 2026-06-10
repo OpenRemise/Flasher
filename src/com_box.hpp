@@ -24,6 +24,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QGroupBox>
+#include <QPointer>
 #include <QPushButton>
 #include <QThread>
 #include <esp_flasher/esp_flasher.hpp>
@@ -52,6 +53,6 @@ private:
   QComboBox* _baud_combobox{new QComboBox};
   QPushButton* _start_stop_button{new QPushButton};
   QVector<Bin> _bins{};
-  QThread* _thread{};
-  EspFlasher* _esp_flasher{};
+  QPointer<QThread> _thread{};
+  QPointer<EspFlasher> _esp_flasher{};
 };

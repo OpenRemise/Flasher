@@ -43,10 +43,11 @@ int main(int argc, char* argv[]) {
   app.setFont(font);
 
   // Apply breeze stylesheet
-  QFile file{":/light/stylesheet.qss"};
-  file.open(QFile::ReadOnly | QFile::Text);
-  QTextStream stream{&file};
-  app.setStyleSheet(stream.readAll());
+  if (QFile file{":/light/stylesheet.qss"};
+      file.open(QFile::ReadOnly | QFile::Text)) {
+    QTextStream stream{&file};
+    app.setStyleSheet(stream.readAll());
+  }
 
   MainWindow w{};
   w.show();

@@ -128,6 +128,6 @@ void ComBox::startStopButtonClicked(bool start) {
     _thread->start();
   }
   // Stop running thread
-  else if (_thread->isRunning())
+  else if (_thread && _thread->isRunning())
     _thread->requestInterruption();
 }
