@@ -89,45 +89,69 @@ void ComBox::binaries(QVector<Bin> bins) { _bins = bins; }
 
 /// Start/stop button slot
 ///
-/// \param  start
+/// \param  start Button state
 void ComBox::startStopButtonClicked(bool start) {
-  // Start thread
+  // Start erase then flash phase
   if (start) {
     _start_stop_button->setText("Stop");
-
-    QString const port{_port_combobox->currentText()};
-    QString const baud{_baud_combobox->currentText()};
-
-    _thread = new QThread;
-    _esp_flasher = new EspFlasher{
-      "esp32s3", port, baud, "no_reset", "no_reset", "", "", _bins};
-    _esp_flasher->moveToThread(_thread);
-
-    // Thread starts loader
-    connect(_thread,
-            &QThread::started,
-            _esp_flasher,
-            qOverload<>(&EspFlasher::flash));
-
-    // When loader finishes, quit thread and delete loader
-    connect(_esp_flasher, &EspFlasher::finished, _thread, &QThread::quit);
-    connect(_esp_flasher,
-            &EspFlasher::finished,
-            _esp_flasher,
-            &EspFlasher::deleteLater);
-
-    // When thread finished, delete thread
-    connect(_thread, &QThread::finished, _thread, &QThread::deleteLater);
-
-    // Once thread is destroyed, reset button
-    connect(_thread, &QThread::destroyed, [this] {
-      _start_stop_button->setChecked(false);
-      _start_stop_button->setText("Start");
-    });
-
-    _thread->start();
+    startErase(_port_combobox->currentText(), _baud_combobox->currentText());
   }
-  // Stop running thread
+  // Stop
   else if (_thread && _thread->isRunning())
     _thread->requestInterruption();
+}
+
+/// Erase phase
+///
+/// \param  port  Serial port device
+/// \param  baud  Serial port baud rate
+void ComBox::startErase(QString port, QString baud) {
+  _thread = new QThread;
+  _esp_flasher = new EspFlasher{
+    "esp32s3", port, baud, "no_reset", "no_reset", "", "", _bins};
+  _esp_flasher->moveToThread(_thread);
+  connect(_thread, &QThread::started, _esp_flasher, &EspFlasher::erase);
+  connect(_esp_flasher, &EspFlasher::finished, _thread, &QThread::quit);
+  connect(_esp_flasher,
+          &EspFlasher::finished,
+          _esp_flasher,
+          &EspFlasher::deleteLater);
+  connect(_thread, &QThread::finished, _thread, &QThread::deleteLater);
+
+  connect(_thread, &QThread::destroyed, [this, port, baud] {
+    // Check if user cancelled
+    if (!_start_stop_button->isChecked()) {
+      _start_stop_button->setText("Start");
+      return;
+    }
+    startFlash(port, baud);
+  });
+
+  _thread->start();
+}
+
+/// Flash phase
+///
+/// \param  port  Serial port device
+/// \param  baud  Serial port baud rate
+void ComBox::startFlash(QString port, QString baud) {
+  _thread = new QThread;
+  _esp_flasher = new EspFlasher{
+    "esp32s3", port, baud, "no_reset", "no_reset", "", "", _bins};
+  _esp_flasher->moveToThread(_thread);
+  connect(
+    _thread, &QThread::started, _esp_flasher, qOverload<>(&EspFlasher::flash));
+  connect(_esp_flasher, &EspFlasher::finished, _thread, &QThread::quit);
+  connect(_esp_flasher,
+          &EspFlasher::finished,
+          _esp_flasher,
+          &EspFlasher::deleteLater);
+  connect(_thread, &QThread::finished, _thread, &QThread::deleteLater);
+
+  connect(_thread, &QThread::destroyed, [this] {
+    _start_stop_button->setChecked(false);
+    _start_stop_button->setText("Start");
+  });
+
+  _thread->start();
 }
