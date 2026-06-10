@@ -46,6 +46,8 @@ public slots:
 
 private slots:
   void startStopButtonClicked(bool start);
+  void startErase(QString port, QString baud);
+  void startFlash(QString port, QString baud);
 
 private:
   QComboBox* _board_combobox{new QComboBox};
